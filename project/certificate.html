@@ -1,0 +1,406 @@
+
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ডিজিটাল সার্টিফিকেট জেনারেটর - SHADOW JOKER</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Sacramento&display=swap" rel="stylesheet">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    
+    <style>
+        /* ফন্ট ও বেসিক সেটআপ */
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Sacramento&display=swap'); /* সিগনেচার ফন্ট */
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Noto Sans Bengali', Arial, sans-serif;
+            background-color: #f4f4f4;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        /* ডিসক্লেমার স্টাইল */
+        .disclaimer {
+            width: 95%;
+            max-width: 1400px;
+            background-color: #ffebeb; /* হালকা গোলাপি ব্যাকগ্রাউন্ড */
+            border: 2px solid #e74c3c; /* লাল বর্ডার */
+            color: #c0392b; /* গাঢ় লাল টেক্সট */
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 1rem;
+            font-weight: 700;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        /* মূল কন্টেইনার */
+        .app-container {
+            display: flex;
+            gap: 30px;
+            width: 95%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* ইনপুট ফর্ম (বাম পাশ) */
+        .input-form-panel {
+            flex: 1;
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .input-form-panel h2 {
+            color: #34495e;
+            border-bottom: 2px solid #34495e;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        .input-group { margin-bottom: 10px; }
+        .input-group label { display: block; margin-bottom: 3px; font-weight: 600; font-size: 0.9em; color: #555; }
+        .input-group input { 
+            width: 100%; padding: 8px; border: 1px solid #ccc; 
+            border-radius: 4px; font-size: 0.9rem; font-family: inherit;
+        }
+        
+        /* সার্টিফিকেট প্রিভিউ (ডান পাশ) */
+        .preview-panel {
+            flex: 2;
+            padding: 0; 
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+        }
+
+        .certificate-card {
+            width: 100%;
+            max-width: 600px; 
+            aspect-ratio: 0.707; 
+            position: relative;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            padding: 0;
+            color: #000;
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-size: contain; 
+            background-image: url('20251020_161606.jpg'); /* আপনার নতুন ছবির নাম */
+            background-color: transparent;
+            background-blend-mode: normal; 
+        }
+
+        /* সার্টিফিকেটের উপরে যোগ করা টেক্সটের স্টাইল */
+        .overlay-text {
+            position: absolute;
+            font-family: 'Noto Sans Bengali', Arial, sans-serif;
+            font-size: 8px; /* ফন্ট সাইজ টিউন করা হলো */
+            font-weight: 400; 
+            color: #000;
+            white-space: nowrap;
+            line-height: 1.5;
+        }
+        .overlay-text.en {
+            font-family: Arial, sans-serif;
+            font-weight: normal; 
+            font-size: 9px; /* ইংরেজি ফন্ট সাইজ টিউন করা হলো */
+            color: #000;
+        }
+        .union-text {
+            font-size: 9px; 
+            font-weight: 400; 
+            letter-spacing: 0.5px;
+            color: #000;
+        }
+        .reg-num-text {
+            font-size: 9px; 
+            font-weight: 400; 
+            text-align: center;
+            color: #000;
+        }
+        /* ঠিকানার গ্রাম/ভিলেজ অংশের জন্য ছোট ফন্ট সাইজ */
+        .address-part {
+            font-size: 6.2px; 
+            font-weight: 400;
+        }
+        .address-part.en {
+            font-size: 8.5px; 
+            font-weight: normal;
+        }
+
+        /* **SHADOW JOKER সিগনেচার স্টাইল** */
+        .signature-credit {
+            position: absolute;
+            bottom: 17%; 
+            right: 8%;
+            font-family: 'Sacramento', cursive; 
+            font-size: 7px; 
+            color: #333;
+            opacity: 0.9;
+        }
+
+
+        /* টেক্সট পজিশন (Absolute Positioning) - চূড়ান্ত টিউনিং */
+        
+        /* ইউনিয়ন পরিষদ (Union Parishad) */
+        #unionDisplay { top: 21.5%; left: 34%; width: 35%; text-align: center; }
+
+        /* রেজিষ্ট্রেশন নাম্বার */
+        #regNumDisplay { top: 31.7%; left: 43.5%; width: 28%; text-align: center; }
+        
+        /* জন্ম তারিখ */
+        #dobDisplay { top: 36%; left: 30%; }
+        #doiDisplay { top: 31.7%; left: 78%; }
+
+        /* জন্ম তারিখ কথায় */
+        #dobWordDisplay { top: 38%; left: 30.5%; width: 30%; }
+
+        /* নাম */
+        #userNameBn { top: 43.3%; left: 30%; } 
+        #userNameEn { top: 43.2%; left: 66.5%; } 
+
+        /* মাতার নাম */
+        #motherNameBn { top: 46.5%; left: 30%; } 
+        #motherNameEn { top: 46.5%; left: 66.5%; }
+
+        /* পিতার নাম */
+        #fatherNameBn { top: 53.5%; left: 30%; } 
+        #fatherNameEn { top: 53.5%; left: 66.5%; }
+
+        /* ** নতুন জন্মস্থান (District/Division) ** */
+        #birthPlaceBnDisplay { top: 61%; left: 30%; } 
+        #birthPlaceEnDisplay { top: 61%; left: 66.5%; }
+
+        /* স্থায়ী ঠিকানা */
+        #addressBn { top: 66%; left: 29%; } 
+        #addressEn { top: 66%; left: 68%; }
+        
+        /* বাটন স্টাইল */
+        .action-buttons { margin-top: 20px; }
+        .action-buttons button {
+            background: #2ecc71;
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1.rem;
+            transition: background 0.3s;
+            margin: 5px;
+        }
+        #downloadBtn:hover { background: #27ae60; }
+        
+        /* রেসপনসিভ ডিজাইন */
+        @media (max-width: 1024px) {
+            .app-container { flex-direction: column; }
+            .input-form-panel { max-height: none; overflow-y: visible; }
+            .certificate-card { max-width: 100%; }
+        }
+    </style>
+    </head>
+<body>
+
+    <div class="disclaimer">
+        ⚠️ **গুরুত্বপূর্ণ সতর্কতা:** এই টুলসটি তৈরি করা হয়েছে শুধুমাত্র **শিক্ষার উদ্দেশ্যে** এবং HTML/CSS/JS দক্ষতা প্রদর্শনের জন্য। এটি দিয়ে তৈরি কোনো ডকুমেন্ট **খারাপ কাজে** বা **প্রতারণার উদ্দেশ্যে** ব্যবহার করবেন না। এর অপব্যবহারের জন্য **RNASAKS** কর্তৃপক্ষ দায়ী থাকবে না।
+    </div>
+    
+    <div class="app-container">
+        <div class="input-form-panel">
+            <h2>প্রয়োজনীয় তথ্য ইনপুট</h2>
+            <form id="certificateForm">
+                
+                <div class="input-group">
+                    <label for="dobInput">জন্ম তারিখ (DD/MM/YYYY):</label>
+                    <input type="text" id="dobInput" value="10/10/1995" required>
+                </div>
+                <div class="input-group">
+                    <label for="dobWordInput">জন্ম তারিখ কথায় (ইংরেজিতে):</label>
+                    <input type="text" id="dobWordInput" value="Tenth October Nineteen Ninety-Five" required>
+                </div>
+                <div class="input-group">
+                    <label for="doiInput">ইস্যু ডেট (Date of Issuance):</label>
+                    <input type="text" id="doiInput" value="21/10/2025" required>
+                </div>
+                
+                <hr style="margin: 15px 0;">
+
+                <div class="input-group">
+                    <label for="regNumEnInput">রেজিষ্ট্রেশন নাম্বার (ইংরেজি):</label>
+                    <input type="text" id="regNumEnInput" value="19951010123456789" required>
+                </div>
+                
+                <div class="input-group"><label for="unionInput">ইউনিয়ন (শুধু ইংরেজিতে):</label><input type="text" id="unionInput" value="MOGRAHAT UNION PARISHAD" required></div>
+                
+                <hr style="margin: 15px 0;">
+                
+                <h3>জন্মস্থান (Place of Birth)</h3>
+                <div class="input-group">
+                    <label for="birthDistrictBnInput">জন্মস্থান জেলা (বাংলা):</label>
+                    <input type="text" id="birthDistrictBnInput" value="ঝিনাইদহ" required>
+                </div>
+                <div class="input-group">
+                    <label for="birthDivisionBnInput">জন্মস্থান বিভাগ (বাংলা):</label>
+                    <input type="text" id="birthDivisionBnInput" value="খুলনা" required>
+                </div>
+                <div class="input-group">
+                    <label for="birthDistrictEnInput">জন্মস্থান জেলা (ইংরেজি):</label>
+                    <input type="text" id="birthDistrictEnInput" value="Jhenaidah" required>
+                </div>
+                <div class="input-group">
+                    <label for="birthDivisionEnInput">জন্মস্থান বিভাগ (ইংরেজি):</label>
+                    <input type="text" id="birthDivisionEnInput" value="Khulna" required>
+                </div>
+
+                <hr style="margin: 15px 0;">
+
+                <div class="input-group"><label for="userNameBnInput">নিজের নাম (বাংলা):</label><input type="text" id="userNameBnInput" value="অনিমেষ রায়" required></div>
+                <div class="input-group"><label for="userNameEnInput">নিজের নাম (ইংরেজি):</label><input type="text" id="userNameEnInput" value="ANIMESH ROY" required></div>
+                <div class="input-group"><label for="fatherNameBnInput">পিতার নাম (বাংলা):</label><input type="text" id="fatherNameBnInput" value="প্রভাত রঞ্জন রায়" required></div>
+                <div class="input-group"><label for="fatherNameEnInput">পিতার নাম (ইংরেজি):</label><input type="text" id="fatherNameEnInput" value="PRABHAT RANJAN ROY" required></div>
+                <div class="input-group"><label for="motherNameBnInput">মাতার নাম (বাংলা):</label><input type="text" id="motherNameBnInput" value="শোভা রাণী রায়" required></div>
+                <div class="input-group"><label for="motherNameEnInput">মাতার নাম (ইংরেজি):</label><input type="text" id="motherNameEnInput" value="SHOBHA RANI ROY" required></div>
+                
+                <div class="input-group"><label for="addressBnInput">স্থায়ী ঠিকানা (বাংলা) [গ্রাম,থানা,জেলা,বিভাগ]:</label><input type="text" id="addressBnInput" value="মোগরাহাট,কালীগঞ্জ,ঝিনাইদহ" required></div>
+                <div class="input-group"><label for="addressEnInput">স্থায়ী ঠিকানা (ইংরেজি) [Village, Thana,District, Division]:</label><input type="text" id="addressEnInput" value="Mograhat,Kaliganj,Jhenaidah" required></div>
+
+                <div class="action-buttons"><button type="submit">সার্টিফিকেট আপডেট করুন</button></div>
+            </form>
+        </div>
+
+        <div class="preview-panel">
+            <div id="certificateToDownload" class="certificate-card">
+                <div id="dobDisplay" class="overlay-text"></div>
+                <div id="doiDisplay" class="overlay-text"></div>
+                <div id="dobWordDisplay" class="overlay-text en"></div>
+                
+                <div id="unionDisplay" class="overlay-text union-text"></div>
+                <div id="regNumDisplay" class="overlay-text reg-num-text"></div>
+
+                <div id="userNameBn" class="overlay-text"></div>
+                <div id="userNameEn" class="overlay-text en"></div>
+
+                <div id="fatherNameBn" class="overlay-text"></div>
+                <div id="fatherNameEn" class="overlay-text en"></div>
+
+                <div id="motherNameBn" class="overlay-text"></div>
+                <div id="motherNameEn" class="overlay-text en"></div>
+                
+                <div id="birthPlaceBnDisplay" class="overlay-text"></div>
+                <div id="birthPlaceEnDisplay" class="overlay-text en"></div>
+
+                <div id="addressBn" class="overlay-text address-part"></div> 
+                <div id="addressEn" class="overlay-text address-part en"></div> 
+                
+                <div id="shadowJokerSignature" class="signature-credit">
+                     SHADOW JOKER
+                </div>
+            </div>
+
+            <div class="action-buttons">
+                 <button id="downloadBtn">ছবি ডাউনলোড করুন (PNG) 📸</button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Digital Certificate Generator. Credit: Rnasaks</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const form = document.getElementById('certificateForm');
+            const certificateCard = document.getElementById('certificateToDownload');
+            const downloadBtn = document.getElementById('downloadBtn');
+            
+            // প্রাথমিক ডেটা প্রদর্শন ফাংশন
+            function updateDisplay() {
+                // জন্মতারিখ ও রেজিষ্ট্রেশন
+                document.getElementById('dobDisplay').textContent = document.getElementById('dobInput').value;
+                document.getElementById('doiDisplay').textContent = document.getElementById('doiInput').value;
+                document.getElementById('dobWordDisplay').textContent = document.getElementById('dobWordInput').value;
+                document.getElementById('regNumDisplay').textContent = document.getElementById('regNumEnInput').value;
+                
+                // ইউনিয়ন
+                document.getElementById('unionDisplay').textContent = document.getElementById('unionInput').value;
+                
+                // নাম
+                document.getElementById('userNameBn').textContent = document.getElementById('userNameBnInput').value;
+                document.getElementById('userNameEn').textContent = document.getElementById('userNameEnInput').value;
+                
+                // পিতা-মাতার নাম
+                document.getElementById('fatherNameBn').textContent = document.getElementById('fatherNameBnInput').value;
+                document.getElementById('fatherNameEn').textContent = document.getElementById('fatherNameEnInput').value;
+                document.getElementById('motherNameBn').textContent = document.getElementById('motherNameBnInput').value;
+                document.getElementById('motherNameEn').textContent = document.getElementById('motherNameEnInput').value;
+                
+                // **জন্মস্থান একত্রিত করে প্রদর্শন**
+                const birthDistrictBn = document.getElementById('birthDistrictBnInput').value;
+                const birthDivisionBn = document.getElementById('birthDivisionBnInput').value;
+                const birthDistrictEn = document.getElementById('birthDistrictEnInput').value;
+                const birthDivisionEn = document.getElementById('birthDivisionEnInput').value;
+
+                // বাংলা: জেলা, বিভাগ
+                document.getElementById('birthPlaceBnDisplay').textContent = `${birthDistrictBn}, ${birthDivisionBn}`;
+                // ইংরেজি: District, Division
+                document.getElementById('birthPlaceEnDisplay').textContent = `${birthDistrictEn}, ${birthDivisionEn}`;
+
+
+                // স্থায়ী ঠিকানা
+                document.getElementById('addressBn').textContent = document.getElementById('addressBnInput').value;
+                document.getElementById('addressEn').textContent = document.getElementById('addressEnInput').value;
+            }
+
+            // ফর্ম সাবমিট হ্যান্ডলার
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                updateDisplay();
+                alert('সার্টিফিকেট প্রিভিউ আপডেট করা হয়েছে! \n\nডাউনলোড করার আগে টেক্সটগুলো ঠিক জায়গায় আছে কিনা, দেখে নিন।');
+            });
+            
+            // ডাউনলোড ফাংশন (html2canvas ব্যবহার করে)
+            downloadBtn.addEventListener('click', function() {
+                // ডিসক্লেমার লুকানো
+                const disclaimer = document.querySelector('.disclaimer');
+                disclaimer.style.display = 'none';
+
+                downloadBtn.style.display = 'none'; 
+                
+                html2canvas(certificateCard, { 
+                    scale: 2, 
+                    useCORS: true, 
+                    allowTaint: true,
+                    backgroundColor: null 
+                }).then(canvas => {
+                    const image = canvas.toDataURL("image/png");
+                    const link = document.createElement('a');
+                    link.download = 'BirthCertificate_RNASAKS.png';
+                    link.href = image;
+                    link.click();
+                    
+                    // ডিসক্লেমার ও ডাউনলোড বাটন ফিরিয়ে আনা
+                    downloadBtn.style.display = 'inline-block';
+                    disclaimer.style.display = 'block';
+
+                });
+            });
+
+            // প্রাথমিক ডেটা লোড করা
+            updateDisplay();
+        });
+    </script>
+    </body>
+</html>
+
+
